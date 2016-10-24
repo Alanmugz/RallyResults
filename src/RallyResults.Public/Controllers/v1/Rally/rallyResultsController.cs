@@ -8,7 +8,7 @@ using Check = CCS.Common.DBC.Check;
 
 namespace RallyResults.Public.Controllers.v1.Rally
 {
-	[RoutePrefix("rallyresults")]
+	[RoutePrefix("v1/rallyresults")]
 	public class rallyResultsController : ApiController
 	{
 		private readonly ILog c_logger;
@@ -32,6 +32,19 @@ namespace RallyResults.Public.Controllers.v1.Rally
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
 			return base.Request.CreateResponse(HttpStatusCode.Created);
+		}
+
+
+		[Route]
+		public HttpResponseMessage Post(
+			RallyResults.Public.Models.Event @event)
+		{
+			var _loggingContext = string.Format("{0}.Post", this.GetType().FullName);
+			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
+
+			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
+
+			return base.Request.CreateResponse(HttpStatusCode.Created, @event);
 		}
 	}
 }
