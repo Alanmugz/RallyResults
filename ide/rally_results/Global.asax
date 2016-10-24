@@ -1,0 +1,1 @@
+﻿<%@ Application Inherits="RallyResults.Public.Code.Infrastructure.Application" Language="C#" %>

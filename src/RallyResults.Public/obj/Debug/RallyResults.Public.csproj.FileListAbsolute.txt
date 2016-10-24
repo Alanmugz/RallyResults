@@ -1,0 +1,11 @@
+F:\RallyResults\src\RallyResults.Public\obj\Debug\RallyResults.Public.csprojResolveAssemblyReference.cache
+F:\RallyResults\src\RallyResults.Public\bin\Debug\RallyResults.Public.dll
+F:\RallyResults\src\RallyResults.Public\bin\Debug\RallyResults.Public.pdb
+F:\RallyResults\src\RallyResults.Public\bin\Debug\log4net.dll
+F:\RallyResults\src\RallyResults.Public\bin\Debug\System.Web.Http.dll
+F:\RallyResults\src\RallyResults.Public\bin\Debug\System.Web.Http.WebHost.dll
+F:\RallyResults\src\RallyResults.Public\obj\Debug\RallyResults.Public.dll
+F:\RallyResults\src\RallyResults.Public\obj\Debug\RallyResults.Public.pdb
+F:\RallyResults\src\RallyResults.Public\bin\Debug\System.Net.Http.Formatting.dll
+F:\RallyResults\src\RallyResults.Public\bin\Debug\Newtonsoft.Json.dll
+F:\RallyResults\src\RallyResults.Public\bin\Debug\CCS.Common.dll
