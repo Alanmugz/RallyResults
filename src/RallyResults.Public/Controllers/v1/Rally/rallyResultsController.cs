@@ -23,19 +23,7 @@ namespace RallyResults.Public.Controllers.v1.Rally
 		}
 
 
-		[Route]
-		public HttpResponseMessage Get()
-		{
-			var _loggingContext = string.Format("{0}.Post", this.GetType().FullName);
-			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
-
-			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
-
-			return base.Request.CreateResponse(HttpStatusCode.Created);
-		}
-
-
-		[Route]
+		[Route("insert/event")]
 		public HttpResponseMessage Post(
 			RallyResults.Public.Models.Event @event)
 		{
@@ -45,6 +33,19 @@ namespace RallyResults.Public.Controllers.v1.Rally
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
 			return base.Request.CreateResponse(HttpStatusCode.Created, @event);
+		}
+
+
+		[Route("update/event")]
+		public HttpResponseMessage Put(
+			RallyResults.Public.Models.Event @event)
+		{
+			var _loggingContext = string.Format("{0}.Post", this.GetType().FullName);
+			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
+
+			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
+
+			return base.Request.CreateResponse(HttpStatusCode.OK);
 		}
 	}
 }

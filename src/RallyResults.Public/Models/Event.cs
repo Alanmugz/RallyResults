@@ -4,23 +4,23 @@ using System.Collections.Generic;
 
 namespace RallyResults.Public.Models
 {
-	public class Category
+	public class Event
 	{
-		public string type { get; set; }
-		public string @class { get; set; }
+		public int id;
+		public string name;
+		public DateTime startdate;
+		public DateTime finishdate;
+		public string surface;
+		public string image;
+		public List<int> service;
+		public List<int> endofday;
+		public List<Category> category;
 	}
 
 
-	public class Event
+	public class Category
 	{
-		public int id { get; set; }
-		public string name { get; set; }
-		public string startdate { get; set; }
-		public string finishdate { get; set; }
-		public string surface { get; set; }
-		public string image { get; set; }
-		public List<int> service { get; set; }
-		public List<int> endofday { get; set; }
-		public List<Category> category { get; set; }
+		public string type;
+		public string @class;
 	}
 }
