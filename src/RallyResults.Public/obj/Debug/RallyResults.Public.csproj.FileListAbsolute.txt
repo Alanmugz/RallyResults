@@ -9,3 +9,14 @@ F:\RallyResults\src\RallyResults.Public\obj\Debug\RallyResults.Public.pdb
 F:\RallyResults\src\RallyResults.Public\bin\Debug\System.Net.Http.Formatting.dll
 F:\RallyResults\src\RallyResults.Public\bin\Debug\Newtonsoft.Json.dll
 F:\RallyResults\src\RallyResults.Public\bin\Debug\CCS.Common.dll
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\bin\Debug\RallyResults.Public.dll
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\bin\Debug\RallyResults.Public.pdb
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\bin\Debug\CCS.Common.dll
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\bin\Debug\log4net.dll
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\bin\Debug\Newtonsoft.Json.dll
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\bin\Debug\System.Web.Http.dll
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\obj\Debug\RallyResults.Public.csprojResolveAssemblyReference.cache
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\obj\Debug\RallyResults.Public.dll
+C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\obj\Debug\RallyResults.Public.pdb

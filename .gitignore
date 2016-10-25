@@ -8,16 +8,3 @@ obj/
 *.suo
 ide/.vs/
 misc/ReutersAPISimulator/.vs/
-
-# Resharper files
-*resharper*
-_resharper*/
-
-# MS Test runner add-in results directories at any depth
-TestResults/
-
-# bin directories exclusions
-!lib/NUnit/bin/
-
-# JMeter log
-jmeter.log
