@@ -6,4 +6,5 @@ obj/
 *.sln.DotSettings.user
 *.csproj.user
 *.suo
+*.cache
 ide/.vs/

@@ -1,36 +1,8 @@
 ﻿
 Curl:
-	Schedules
-		local
-			curl.exe -v -H 'Accept: application/json' -H 'Content-type: application/json' -X POST -d "{ provider_id : 9 }" http://localhost:20001/schedules
-
-		dev
-			curl.exe -v -H 'Accept: application/json' -H 'Content-type: application/json' -X POST -d "{ provider_id : 9 }" https://dev.internal.appfarm.local/reutersclient/schedules --insecure
-
-		extdev
-			curl.exe -v -H 'Accept: application/json' -H 'Content-type: application/json' -X POST -d "{ provider_id : 9 }" https://extdev.internal.appfarm.local/reutersclient/schedules --insecure
-
-		qa
-			curl.exe -v -H 'Accept: application/json' -H 'Content-type: application/json' -X POST -d "{ provider_id : 9 }" https://qa.internal.appfarm.local/reutersclient/schedules --insecure
-
-		uat
-			curl.exe -v -H 'Accept: application/json' -H 'Content-type: application/json' -X POST -d "{ provider_id : 9 }" https://uat.internal.appfarm.local/reutersclient/schedules --insecure
-
-		prod
-			curl.exe -v -H 'Accept: application/json' -H 'Content-type: application/json' -X POST -d "{ provider_id : 9 }" https://s1.prod.internal.appfarm.local/reutersclient/schedules --insecure
-			
-	Rates
-		local
-			curl.exe -v "http://localhost:20001/rates?file_name=ReutersRates.xml" --insecure
-			
-		dev
-			curl.exe -v "https://dev.internal.appfarm.local/reutersclient/rates?file_name=ReutersRates.xml" --insecure
-			
-		extdev
-			curl.exe -v "https://extdev.internal.appfarm.local/reutersclient/rates?file_name=ReutersRates.xml" --insecure
-			
-		qa
-			curl.exe -v "https://qa.internal.appfarm.local/reutersclient/rates?file_name=ReutersRates.xml" --insecure
-			
-		uat
-			curl.exe -v "https://uat.internal.appfarm.local/reutersclient/rates?file_name=ReutersRates.xml" --insecure
+	
+	$json = "{\""id\"": 1,\""name\"": \""Westlodge Fastnet Rally 2015\"",\""startdate\"": \""2015-10-24\"",\""finishdate\"": \""2015-10-25\"",\""surface\"": \""Tarmac\"",\""image\"": \""image.jpg\"",\""service\"": [3, 6],\""endofday\"": [10],\""category\"": [{\""type\"": \""Main Field\"",\""class\"": \""1\""}]}"
+	
+	.\curl.exe -v -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d $json http://localhost:2235/v1/rallyresults/insert/event
+	
+	.\curl.exe -v -H "Accept: application/json" -H "Content-Type: application/json" -X PUT -d $json http://localhost:2235/v1/rallyresults/update/event
