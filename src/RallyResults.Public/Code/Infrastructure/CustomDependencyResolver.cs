@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using AutoMapper;
+using log4net;
 using log4net.Config;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,11 @@ namespace RallyResults.Public.Code.Infrastructure
 	{
 		private readonly string c_environment;
 		private readonly ILog c_logger;
+		private readonly IMapper c_mapper;
 
 
 		public ILog Logger { get { return this.c_logger; } }
+		public IMapper Mapper { get { return this.c_mapper; } }
 
 
 		public CustomDependencyResolver()
@@ -25,6 +28,14 @@ namespace RallyResults.Public.Code.Infrastructure
 			GlobalContext.Properties["pid"] = Process.GetCurrentProcess().Id;	// See http://stackoverflow.com/questions/2075603/log4net-process-id-information
 			this.c_environment = ConfigurationManager.AppSettings["environment"];
 			this.c_logger = LogManager.GetLogger(ConfigurationManager.AppSettings["defaultLoggerName"]);
+
+			AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<RallyResults.Public.Models.Event, RallyResults.Data.Models.Event>());
+			var config = new MapperConfiguration(cfg => {
+				cfg.CreateMap<RallyResults.Public.Models.Event, RallyResults.Data.Models.Event>();
+				cfg.CreateMap<RallyResults.Public.Models.Category, RallyResults.Data.Models.Category>();
+			});
+
+			c_mapper = new Mapper(config);
 		}
 
 
@@ -43,7 +54,7 @@ namespace RallyResults.Public.Code.Infrastructure
 			if (serviceType == typeof(RallyResults.Public.Controllers.v1.Rally.rallyResultsController))
 			{
 				return new RallyResults.Public.Controllers.v1.Rally.rallyResultsController(
-					this.c_logger);
+					this.c_logger, this.c_mapper);
 			}
 
 			return null;
