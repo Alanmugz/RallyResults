@@ -20,3 +20,6 @@ C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\bin\Debug\
 C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\obj\Debug\RallyResults.Public.csprojResolveAssemblyReference.cache
 C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\obj\Debug\RallyResults.Public.dll
 C:\Users\amulligan\Desktop\Test2\RallyResults\src\RallyResults.Public\obj\Debug\RallyResults.Public.pdb
+F:\RallyResults\src\RallyResults.Public\bin\Debug\AutoMapper.dll
+F:\RallyResults\src\RallyResults.Public\bin\Debug\RallyResults.Data.dll
+F:\RallyResults\src\RallyResults.Public\bin\Debug\RallyResults.Data.pdb

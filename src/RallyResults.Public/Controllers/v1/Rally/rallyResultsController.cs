@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using AutoMapper;
+using log4net;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -12,14 +13,19 @@ namespace RallyResults.Public.Controllers.v1.Rally
 	public class rallyResultsController : ApiController
 	{
 		private readonly ILog c_logger;
+		private readonly IMapper c_mapper;
+		private RallyResults.Data.Class1 c_repo = new RallyResults.Data.Class1();
 
 
 		public rallyResultsController(
-			ILog logger)
+			ILog logger,
+			IMapper mapper)
 		{
 			Check.RequireArgumentNotNull("logger", logger);
+			Check.RequireArgumentNotNull("mapper", mapper);
 
 			this.c_logger = logger;
+			this.c_mapper = mapper;
 		}
 
 
@@ -29,6 +35,9 @@ namespace RallyResults.Public.Controllers.v1.Rally
 		{
 			var _loggingContext = string.Format("{0}.Post", this.GetType().FullName);
 			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
+
+			var dest = this.c_mapper.Map<RallyResults.Public.Models.Event, RallyResults.Data.Models.Event>(@event);
+			c_repo.Execute(dest);
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 

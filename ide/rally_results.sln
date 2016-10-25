@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rally_results", "rally_resu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RallyResults.Public", "..\src\RallyResults.Public\RallyResults.Public.csproj", "{B9322832-5FBD-448F-B218-00D47DC2071F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RallyResults.Data", "..\src\RallyResults.Data\RallyResults.Data.csproj", "{A9141827-66E5-4939-84D7-D778C660E8AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B9322832-5FBD-448F-B218-00D47DC2071F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9322832-5FBD-448F-B218-00D47DC2071F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9322832-5FBD-448F-B218-00D47DC2071F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9141827-66E5-4939-84D7-D778C660E8AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9141827-66E5-4939-84D7-D778C660E8AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9141827-66E5-4939-84D7-D778C660E8AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9141827-66E5-4939-84D7-D778C660E8AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -80,3 +80,6 @@ C:\Users\amulligan\Desktop\Test2\RallyResults\ide\rally_results\bin\Microsoft.Co
 C:\Users\amulligan\Desktop\Test2\RallyResults\ide\rally_results\obj\Debug\rally_results.csprojResolveAssemblyReference.cache
 C:\Users\amulligan\Desktop\Test2\RallyResults\ide\rally_results\obj\Debug\rally_results.dll
 C:\Users\amulligan\Desktop\Test2\RallyResults\ide\rally_results\obj\Debug\rally_results.pdb
+F:\RallyResults\ide\rally_results\bin\AutoMapper.dll
+F:\RallyResults\ide\rally_results\bin\RallyResults.Data.dll
+F:\RallyResults\ide\rally_results\bin\RallyResults.Data.pdb
