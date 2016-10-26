@@ -2,6 +2,10 @@
 bin/
 obj/
 
+ide/rally_results/obj/Debug/rally_results.csproj.FileListAbsolute.txt
+src/RallyResults.Public/obj/Debug/RallyResults.Public.csproj.FileListAbsolute.txt
+src/RallyResults.Public/obj/Debug/RallyResults.Public.csprojResolveAssemblyReference.cache
+
 # Visual studio files and folder
 *.sln.DotSettings.user
 *.csproj.user
