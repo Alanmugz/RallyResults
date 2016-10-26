@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace rally_results
+
+namespace RallyResults.Data
 {
-	public class Repository
+	public class Repository : RallyResults.Data.IRepository
 	{
 	}
 }

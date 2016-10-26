@@ -16,6 +16,7 @@ namespace RallyResults.Public.Code.Infrastructure
 		private readonly string c_environment;
 		private readonly ILog c_logger;
 		private readonly IMapper c_mapper;
+		private readonly RallyResults.Data.IRepository c_repository;
 
 
 		public ILog Logger { get { return this.c_logger; } }
@@ -28,6 +29,9 @@ namespace RallyResults.Public.Code.Infrastructure
 			GlobalContext.Properties["pid"] = Process.GetCurrentProcess().Id;	// See http://stackoverflow.com/questions/2075603/log4net-process-id-information
 			this.c_environment = ConfigurationManager.AppSettings["environment"];
 			this.c_logger = LogManager.GetLogger(ConfigurationManager.AppSettings["defaultLoggerName"]);
+
+			//this.c_repository = new RallyResults.Data.Repository(ConfigurationManager.AppSettings["databaseConnectionString"]);
+			this.c_repository = new RallyResults.Data.Repository();
 
 			AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<RallyResults.Public.Models.Event, RallyResults.Data.Models.Event>());
 			var config = new MapperConfiguration(cfg => {
