@@ -6,7 +6,6 @@ namespace RallyResults.Public.Models
 {
 	public class Event
 	{
-		public int id;
 		public string name;
 		public DateTime startdate;
 		public DateTime finishdate;
