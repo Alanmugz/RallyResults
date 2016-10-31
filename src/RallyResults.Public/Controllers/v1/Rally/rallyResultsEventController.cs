@@ -44,7 +44,7 @@ namespace RallyResults.Public.Controllers.v1.Rally
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			if (result > 0)
+			if (result == RallyResults.Data.Enumeration.Status.Success)
 			{
 				return base.Request.CreateResponse(HttpStatusCode.Created);
 			}
@@ -66,7 +66,7 @@ namespace RallyResults.Public.Controllers.v1.Rally
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			if (_result > 0)
+			if (_result > RallyResults.Data.Enumeration.Status.Success)
 			{
 				return base.Request.CreateResponse(HttpStatusCode.OK);
 			}
@@ -86,7 +86,7 @@ namespace RallyResults.Public.Controllers.v1.Rally
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			if (_result > 0)
+			if (_result > RallyResults.Data.Enumeration.Status.Success)
 			{
 				return base.Request.CreateResponse(HttpStatusCode.OK);
 			}

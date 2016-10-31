@@ -5,15 +5,15 @@ namespace RallyResults.Data
 {
 	public interface IRepository
 	{
-		int InsertEvent(RallyResults.Data.Models.Event subject);
+		RallyResults.Data.Enumeration.Status InsertEvent(RallyResults.Data.Models.Event subject);
 
 
-		int UpdateEvent(
+		RallyResults.Data.Enumeration.Status UpdateEvent(
 			int id,
 			RallyResults.Data.Models.Event subject);
 
 
-		int DeleteEvent(
+		RallyResults.Data.Enumeration.Status DeleteEvent(
 			int id);
 
 

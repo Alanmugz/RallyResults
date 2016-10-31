@@ -22,7 +22,7 @@ namespace RallyResults.Data
 		}
 
 
-		public int InsertEvent(
+		public RallyResults.Data.Enumeration.Status InsertEvent(
 			RallyResults.Data.Models.Event subject)
 		{
 			try
@@ -39,7 +39,9 @@ namespace RallyResults.Data
 				cmd.Parameters.Add(parameter);
 				cmd.Parameters.Add(new NpgsqlParameter("CreationTimestamp", DateTime.Now));
 
-				return cmd.ExecuteNonQuery();
+				cmd.ExecuteNonQuery();
+
+				return RallyResults.Data.Enumeration.Status.Success;
 			}
 			catch (NpgsqlException ex)
 			{
@@ -50,11 +52,11 @@ namespace RallyResults.Data
 				this.c_connection.Close();
 			}
 
-			return 0;
+			return RallyResults.Data.Enumeration.Status.Failure;
 		}
 
 
-		public int UpdateEvent(
+		public RallyResults.Data.Enumeration.Status UpdateEvent(
 			int id,
 			RallyResults.Data.Models.Event subject)
 		{
@@ -72,7 +74,9 @@ namespace RallyResults.Data
 				cmd.Parameters.Add(parameter);
 				cmd.Parameters.Add(new NpgsqlParameter("CreationTimestamp", DateTime.Now));
 
-				return cmd.ExecuteNonQuery();
+				cmd.ExecuteNonQuery();
+
+				return RallyResults.Data.Enumeration.Status.Success;
 			}
 			catch (NpgsqlException ex)
 			{
@@ -83,11 +87,11 @@ namespace RallyResults.Data
 				this.c_connection.Close();
 			}
 
-			return 0;
+			return RallyResults.Data.Enumeration.Status.Failure;
 		}
 
 
-		public int DeleteEvent(
+		public RallyResults.Data.Enumeration.Status DeleteEvent(
 			int id)
 		{
 			try
@@ -98,7 +102,9 @@ namespace RallyResults.Data
 
 				cmd.Parameters.Add(new NpgsqlParameter("Id", id));
 
-				return cmd.ExecuteNonQuery();
+				cmd.ExecuteNonQuery();
+
+				return RallyResults.Data.Enumeration.Status.Success;
 			}
 			catch (NpgsqlException ex)
 			{
@@ -109,7 +115,7 @@ namespace RallyResults.Data
 				this.c_connection.Close();
 			}
 
-			return 0;
+			return RallyResults.Data.Enumeration.Status.Failure;
 		}
 
 
