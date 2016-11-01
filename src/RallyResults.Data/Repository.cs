@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Npgsql;
 using NpgsqlTypes;
 using System;
-using System.Collections.Generic;
+
 
 namespace RallyResults.Data
 {
@@ -29,17 +29,17 @@ namespace RallyResults.Data
 			{
 				this.c_connection.Open();
 
-				NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO \"Event\" VALUES(:Id, :Category_Class, :CreationTimestamp)", this.c_connection);
+				NpgsqlCommand _cmd = new NpgsqlCommand("INSERT INTO \"Event\" VALUES(:Id, :Category_Class, :CreationTimestamp)", this.c_connection);
 
-				cmd.Parameters.Add(new NpgsqlParameter("Id", this.FetchLastestId()));
-				var parameter = cmd.CreateParameter();
+				_cmd.Parameters.Add(new NpgsqlParameter("Id", this.FetchLastestId()));
+				var parameter = _cmd.CreateParameter();
 				parameter.ParameterName = "Category_Class";
 				parameter.Value = JsonConvert.SerializeObject(subject);
 				parameter.NpgsqlDbType = NpgsqlDbType.Json;
-				cmd.Parameters.Add(parameter);
-				cmd.Parameters.Add(new NpgsqlParameter("CreationTimestamp", DateTime.Now));
+				_cmd.Parameters.Add(parameter);
+				_cmd.Parameters.Add(new NpgsqlParameter("CreationTimestamp", DateTime.Now));
 
-				cmd.ExecuteNonQuery();
+				_cmd.ExecuteNonQuery();
 
 				return RallyResults.Data.Enumeration.Status.Success;
 			}
@@ -64,17 +64,17 @@ namespace RallyResults.Data
 			{
 				this.c_connection.Open();
 
-				NpgsqlCommand cmd = new NpgsqlCommand("UPDATE \"Event\" SET \"Category_Class\" = :Category_Class, \"CreationTimestamp\" = :CreationTimestamp WHERE \"Id\" = :id;", this.c_connection);
+				NpgsqlCommand _cmd = new NpgsqlCommand("UPDATE \"Event\" SET \"Category_Class\" = :Category_Class, \"CreationTimestamp\" = :CreationTimestamp WHERE \"Id\" = :id;", this.c_connection);
 
-				cmd.Parameters.Add(new NpgsqlParameter("Id", id));
-				var parameter = cmd.CreateParameter();
+				_cmd.Parameters.Add(new NpgsqlParameter("Id", id));
+				var parameter = _cmd.CreateParameter();
 				parameter.ParameterName = "Category_Class";
 				parameter.Value = JsonConvert.SerializeObject(subject);
 				parameter.NpgsqlDbType = NpgsqlDbType.Json;
-				cmd.Parameters.Add(parameter);
-				cmd.Parameters.Add(new NpgsqlParameter("CreationTimestamp", DateTime.Now));
+				_cmd.Parameters.Add(parameter);
+				_cmd.Parameters.Add(new NpgsqlParameter("CreationTimestamp", DateTime.Now));
 
-				cmd.ExecuteNonQuery();
+				_cmd.ExecuteNonQuery();
 
 				return RallyResults.Data.Enumeration.Status.Success;
 			}
@@ -98,11 +98,11 @@ namespace RallyResults.Data
 			{
 				this.c_connection.Open();
 
-				NpgsqlCommand cmd = new NpgsqlCommand("DELETE FROM \"Event\" WHERE \"Id\" = :id;", this.c_connection);
+				NpgsqlCommand _cmd = new NpgsqlCommand("DELETE FROM \"Event\" WHERE \"Id\" = :id;", this.c_connection);
 
-				cmd.Parameters.Add(new NpgsqlParameter("Id", id));
+				_cmd.Parameters.Add(new NpgsqlParameter("Id", id));
 
-				cmd.ExecuteNonQuery();
+				_cmd.ExecuteNonQuery();
 
 				return RallyResults.Data.Enumeration.Status.Success;
 			}
@@ -126,11 +126,11 @@ namespace RallyResults.Data
 			{
 				this.c_connection.Open();
 
-				NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM \"Event\" WHERE \"Id\" = :id;", this.c_connection);
+				NpgsqlCommand _cmd = new NpgsqlCommand("SELECT * FROM \"Event\" WHERE \"Id\" = :id;", this.c_connection);
 
-				cmd.Parameters.Add(new NpgsqlParameter("Id", id));
+				_cmd.Parameters.Add(new NpgsqlParameter("Id", id));
 
-				var row = cmd.ExecuteReader();
+				var row = _cmd.ExecuteReader();
 
 				while (row.Read())
 				{
@@ -157,14 +157,14 @@ namespace RallyResults.Data
 
 		private int FetchLastestId()
 		{
-			NpgsqlCommand cmd = new NpgsqlCommand("SELECT MAX(\"Id\") FROM \"Event\"", this.c_connection);
+			NpgsqlCommand _cmd = new NpgsqlCommand("SELECT MAX(\"Id\") FROM \"Event\"", this.c_connection);
 
-			if (cmd.ExecuteScalar() ==  DBNull.Value)
+			if (_cmd.ExecuteScalar() ==  DBNull.Value)
 			{
 				return 1;
 			}
 
-			return Convert.ToInt32(cmd.ExecuteScalar()) + 1;
+			return Convert.ToInt32(_cmd.ExecuteScalar()) + 1;
 		}
 	}
 }
