@@ -14,13 +14,13 @@ namespace RallyResults.Public.Controllers.v1.Rally
 	{
 		private readonly ILog c_logger;
 		private readonly IMapper c_mapper;
-		private RallyResults.Data.IRepository c_eventsRepository;
+		private RallyResults.Domain.Rally.Event c_rallyResultEvent;
 
 
 		public rallyResultsEventController(
 			ILog logger,
 			IMapper mapper,
-			RallyResults.Data.IRepository eventsRepository)
+			RallyResults.Domain.Rally.Event eventsRepository)
 		{
 			Check.RequireArgumentNotNull("logger", logger);
 			Check.RequireArgumentNotNull("mapper", mapper);
@@ -28,26 +28,25 @@ namespace RallyResults.Public.Controllers.v1.Rally
 
 			this.c_logger = logger;
 			this.c_mapper = mapper;
-			this.c_eventsRepository = eventsRepository;
+			this.c_rallyResultEvent = eventsRepository;
 		}
 
 
 		[Route("insert/event")]
 		public HttpResponseMessage Post(
-			RallyResults.Public.Models.Event @event)
+			RallyResults.Domain.Models.Event @event)
 		{
 			var _loggingContext = string.Format("{0}.Post", this.GetType().FullName);
 			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
 
-			var _mappedEvent = this.c_mapper.Map<RallyResults.Public.Models.Event, RallyResults.Data.Models.Event>(@event);
-			var result = c_eventsRepository.InsertEvent(_mappedEvent);
+			this.c_rallyResultEvent.ExecuteInsert(@event);
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			if (result == RallyResults.Data.Enumeration.Status.Success)
-			{
-				return base.Request.CreateResponse(HttpStatusCode.Created);
-			}
+			//if (result == RallyResults.Data.Enumeration.Status.Success)
+			//{
+			//	return base.Request.CreateResponse(HttpStatusCode.Created);
+			//}
 
 			return base.Request.CreateResponse(HttpStatusCode.BadRequest);
 		}
@@ -56,20 +55,19 @@ namespace RallyResults.Public.Controllers.v1.Rally
 		[Route("update/event/id/{id}")]
 		public HttpResponseMessage Put(
 			int id,
-			RallyResults.Public.Models.Event @event)
+			RallyResults.Domain.Models.Event @event)
 		{
 			var _loggingContext = string.Format("{0}.Put.", this.GetType().FullName);
 			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
-
-			var _mappedEvent = this.c_mapper.Map<RallyResults.Public.Models.Event, RallyResults.Data.Models.Event>(@event);
-			var _result = c_eventsRepository.UpdateEvent(id, _mappedEvent);
+			
+			this.c_rallyResultEvent.ExecuteUpdate(@event, id);
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			if (_result > RallyResults.Data.Enumeration.Status.Success)
-			{
-				return base.Request.CreateResponse(HttpStatusCode.OK);
-			}
+			//if (_result > RallyResults.Data.Enumeration.Status.Success)
+			//{
+			//	return base.Request.CreateResponse(HttpStatusCode.OK);
+			//}
 
 			return base.Request.CreateResponse(HttpStatusCode.BadRequest);
 		}
@@ -82,14 +80,14 @@ namespace RallyResults.Public.Controllers.v1.Rally
 			var _loggingContext = string.Format("{0}.Delete.", this.GetType().FullName);
 			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
 
-			var _result = c_eventsRepository.DeleteEvent(id);
+			this.c_rallyResultEvent.ExecuteDelete(id);
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			if (_result > RallyResults.Data.Enumeration.Status.Success)
-			{
-				return base.Request.CreateResponse(HttpStatusCode.OK);
-			}
+			//if (_result > RallyResults.Data.Enumeration.Status.Success)
+			//{
+			//	return base.Request.CreateResponse(HttpStatusCode.OK);
+			//}
 
 			return base.Request.CreateResponse(HttpStatusCode.BadRequest);
 		}
@@ -102,14 +100,14 @@ namespace RallyResults.Public.Controllers.v1.Rally
 			var _loggingContext = string.Format("{0}.Get.", this.GetType().FullName);
 			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
 
-			var _result = c_eventsRepository.SelectEvent(id);
+			this.c_rallyResultEvent.ExecuteSelect(id);
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			if (_result != null)
-			{
-				return base.Request.CreateResponse(HttpStatusCode.OK, _result);
-			}
+			//if (_result != null)
+			//{
+			//	return base.Request.CreateResponse(HttpStatusCode.OK, _result);
+			//}
 
 			return base.Request.CreateResponse(HttpStatusCode.BadRequest);
 		}

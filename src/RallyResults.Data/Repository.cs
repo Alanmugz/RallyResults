@@ -3,7 +3,9 @@ using Newtonsoft.Json;
 using Npgsql;
 using NpgsqlTypes;
 using System;
-
+using System.Configuration;
+using System.Linq;
+using RallyResults.Data.Models;
 
 namespace RallyResults.Data
 {
@@ -14,11 +16,10 @@ namespace RallyResults.Data
 
 
 		public Repository(
-			ILog logger,
-			string databaseConnectionString)
+			ILog logger)
 		{
 			this.c_logger = logger;
-			this.c_connection = new NpgsqlConnection(databaseConnectionString);
+			this.c_connection = new NpgsqlConnection(ConfigurationManager.AppSettings["databaseConnectionString"]);
 		}
 
 
@@ -29,15 +30,17 @@ namespace RallyResults.Data
 			{
 				this.c_connection.Open();
 
+				var _entry = this.MapEvent(subject, this.FetchLastestId());
+
 				NpgsqlCommand _cmd = new NpgsqlCommand("INSERT INTO \"Event\" VALUES(:Id, :Category_Class, :CreationTimestamp)", this.c_connection);
 
-				_cmd.Parameters.Add(new NpgsqlParameter("Id", this.FetchLastestId()));
+				_cmd.Parameters.Add(new NpgsqlParameter("Id", _entry.id));
 				var parameter = _cmd.CreateParameter();
 				parameter.ParameterName = "Category_Class";
-				parameter.Value = JsonConvert.SerializeObject(subject);
+				parameter.Value = JsonConvert.SerializeObject(_entry.eventDetails);
 				parameter.NpgsqlDbType = NpgsqlDbType.Json;
 				_cmd.Parameters.Add(parameter);
-				_cmd.Parameters.Add(new NpgsqlParameter("CreationTimestamp", DateTime.Now));
+				_cmd.Parameters.Add(new NpgsqlParameter("CreationTimestamp", _entry.creationTimestamp));
 
 				_cmd.ExecuteNonQuery();
 
@@ -60,19 +63,21 @@ namespace RallyResults.Data
 			int id,
 			RallyResults.Data.Models.Event subject)
 		{
+			var _entry = this.MapEvent(subject, id);
+
 			try
 			{
 				this.c_connection.Open();
 
 				NpgsqlCommand _cmd = new NpgsqlCommand("UPDATE \"Event\" SET \"Category_Class\" = :Category_Class, \"CreationTimestamp\" = :CreationTimestamp WHERE \"Id\" = :id;", this.c_connection);
 
-				_cmd.Parameters.Add(new NpgsqlParameter("Id", id));
+				_cmd.Parameters.Add(new NpgsqlParameter("Id", _entry.id));
 				var parameter = _cmd.CreateParameter();
 				parameter.ParameterName = "Category_Class";
-				parameter.Value = JsonConvert.SerializeObject(subject);
+				parameter.Value = JsonConvert.SerializeObject(_entry.eventDetails);
 				parameter.NpgsqlDbType = NpgsqlDbType.Json;
 				_cmd.Parameters.Add(parameter);
-				_cmd.Parameters.Add(new NpgsqlParameter("CreationTimestamp", DateTime.Now));
+				_cmd.Parameters.Add(new NpgsqlParameter("CreationTimestamp", _entry.creationTimestamp));
 
 				_cmd.ExecuteNonQuery();
 
@@ -165,6 +170,27 @@ namespace RallyResults.Data
 			}
 
 			return Convert.ToInt32(_cmd.ExecuteScalar()) + 1;
+		}
+
+
+		private RallyResults.Data.AggregateRoot.Event MapEvent(
+			RallyResults.Data.Models.Event subject,
+			int id)
+		{
+			var categories  = subject.category.Select(category => new RallyResults.Data.AggregateRoot.Category(category.type, category.@class)).ToList();
+
+			return new RallyResults.Data.AggregateRoot.Event(
+				id,
+				new RallyResults.Data.AggregateRoot.EventDetails(
+					subject.name,
+					subject.startdate,
+					subject.finishdate,
+					subject.surface,
+					subject.image,
+					subject.service,
+					subject.endofday,
+					categories),
+				DateTime.Now);
 		}
 	}
 }

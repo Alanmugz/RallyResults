@@ -16,7 +16,8 @@ namespace RallyResults.Public.Code.Infrastructure
 		private readonly string c_environment;
 		private readonly ILog c_logger;
 		private readonly IMapper c_mapper;
-		private readonly RallyResults.Data.IRepository c_eventsRepository;
+		private readonly RallyResults.Domain.Rally.Event c_rallyResultsEvent;
+		//private readonly RallyResults.Data.IRepository c_eventsRepository;
 
 
 		public ILog Logger { get { return this.c_logger; } }
@@ -30,12 +31,14 @@ namespace RallyResults.Public.Code.Infrastructure
 			this.c_environment = ConfigurationManager.AppSettings["environment"];
 			this.c_logger = LogManager.GetLogger(ConfigurationManager.AppSettings["defaultLoggerName"]);
 
-			this.c_eventsRepository = new RallyResults.Data.Repository(c_logger, ConfigurationManager.AppSettings["databaseConnectionString"]);
+			this.c_rallyResultsEvent = new RallyResults.Domain.Rally.Event(c_logger);
 
-			AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<RallyResults.Public.Models.Event, RallyResults.Data.Models.Event>());
+			//this.c_eventsRepository = new RallyResults.Data.Repository(c_logger, ConfigurationManager.AppSettings["databaseConnectionString"]);
+
+			AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<RallyResults.Public.Models.Event, RallyResults.Domain.Models.Event>());
 			var config = new MapperConfiguration(cfg => {
-				cfg.CreateMap<RallyResults.Public.Models.Event, RallyResults.Data.Models.Event>();
-				cfg.CreateMap<RallyResults.Public.Models.Category, RallyResults.Data.Models.Category>();
+				cfg.CreateMap<RallyResults.Public.Models.Event, RallyResults.Domain.Models.Event>();
+				cfg.CreateMap<RallyResults.Public.Models.Category, RallyResults.Domain.Models.Category>();
 			});
 
 			c_mapper = new Mapper(config);
@@ -57,7 +60,7 @@ namespace RallyResults.Public.Code.Infrastructure
 			if (serviceType == typeof(RallyResults.Public.Controllers.v1.Rally.rallyResultsEventController))
 			{
 				return new RallyResults.Public.Controllers.v1.Rally.rallyResultsEventController(
-					this.c_logger, this.c_mapper, this.c_eventsRepository);
+					this.c_logger, this.c_mapper, this.c_rallyResultsEvent);
 			}
 
 			return null;
