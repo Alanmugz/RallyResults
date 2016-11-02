@@ -10,6 +10,7 @@ namespace RallyResults.Data.AggregateRoot
 		public readonly EventDetails eventDetails;
 		public readonly DateTime creationTimestamp;
 
+
 		public Event(
 			int id,
 			RallyResults.Data.AggregateRoot.EventDetails eventDetails,

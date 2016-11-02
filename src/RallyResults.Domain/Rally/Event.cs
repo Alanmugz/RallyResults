@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 
+
 namespace RallyResults.Domain.Rally
 {
 	public class Event
@@ -10,9 +11,9 @@ namespace RallyResults.Domain.Rally
 
 		public Event(
 			ILog logger,
-			RallyResults.Data.IRepository repository)
+			RallyResults.Data.IRepository eventsRepository)
 		{
-			this.c_eventsRepository = repository;
+			this.c_eventsRepository = eventsRepository;
 		}
 
 

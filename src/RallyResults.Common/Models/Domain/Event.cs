@@ -15,6 +15,7 @@ namespace RallyResults.Common.Models.Domain
 		public readonly List<int> endofday;
 		public readonly List<Category> category;
 
+
 		public Event(
 			string name,
 			DateTime startdate,
@@ -41,6 +42,7 @@ namespace RallyResults.Common.Models.Domain
 	{
 		public readonly string type;
 		public readonly string @class;
+
 
 		public Category(
 			string type,
