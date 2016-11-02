@@ -9,9 +9,10 @@ namespace RallyResults.Domain.Rally
 		private readonly RallyResults.Data.IRepository c_eventsRepository;
 
 		public Event(
-			ILog logger)
+			ILog logger,
+			RallyResults.Data.IRepository repository)
 		{
-
+			this.c_eventsRepository = repository;
 		}
 
 

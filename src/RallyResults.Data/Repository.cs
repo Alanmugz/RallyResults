@@ -44,7 +44,7 @@ namespace RallyResults.Data
 
 				_cmd.ExecuteNonQuery();
 
-				return new RallyResults.Common.Result(RallyResults.Common.Status.Success, "Error");
+				return new RallyResults.Common.Result(RallyResults.Common.Status.Success, "Event successfully stored");
 			}
 			catch (NpgsqlException ex)
 			{
@@ -55,7 +55,7 @@ namespace RallyResults.Data
 				this.c_connection.Close();
 			}
 
-			return new RallyResults.Common.Result(RallyResults.Common.Status.Failure, "Error");
+			return new RallyResults.Common.Result(RallyResults.Common.Status.Failure, "Error: ");
 		}
 
 

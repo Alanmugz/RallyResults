@@ -9,6 +9,13 @@ namespace RallyResults.Common
 		public object Value { get; private set; }
 
 		public Result(
+			RallyResults.Common.Status status)
+		{
+			this.Status = status;
+		}
+
+
+		public Result(
 			RallyResults.Common.Status status,
 			string description)
 		{

@@ -28,9 +28,10 @@ namespace RallyResults.Public.Code.Infrastructure
 			this.c_environment = ConfigurationManager.AppSettings["environment"];
 			this.c_logger = LogManager.GetLogger(ConfigurationManager.AppSettings["defaultLoggerName"]);
 
-			this.c_rallyResultsEvent = new RallyResults.Domain.Rally.Event(c_logger);
-
 			this.c_eventsRepository = new RallyResults.Data.Repository(c_logger);
+
+			this.c_rallyResultsEvent = new RallyResults.Domain.Rally.Event(c_logger, this.c_eventsRepository);
+
 		}
 
 
