@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using log4net;
+﻿using log4net;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -13,40 +12,38 @@ namespace RallyResults.Public.Controllers.v1.Rally
 	public class rallyResultsEventController : ApiController
 	{
 		private readonly ILog c_logger;
-		private readonly IMapper c_mapper;
 		private RallyResults.Domain.Rally.Event c_rallyResultEvent;
 
 
 		public rallyResultsEventController(
 			ILog logger,
-			IMapper mapper,
-			RallyResults.Domain.Rally.Event eventsRepository)
+			RallyResults.Domain.Rally.Event events)
 		{
 			Check.RequireArgumentNotNull("logger", logger);
-			Check.RequireArgumentNotNull("mapper", mapper);
-			Check.RequireArgumentNotNull("events Repository", eventsRepository);
+			Check.RequireArgumentNotNull("events", events);
 
 			this.c_logger = logger;
-			this.c_mapper = mapper;
-			this.c_rallyResultEvent = eventsRepository;
+			this.c_rallyResultEvent = events;
 		}
 
 
 		[Route("insert/event")]
 		public HttpResponseMessage Post(
-			RallyResults.Domain.Models.Event @event)
+			RallyResults.Common.Models.Domain.Event @event)
 		{
 			var _loggingContext = string.Format("{0}.Post", this.GetType().FullName);
 			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
 
-			this.c_rallyResultEvent.ExecuteInsert(@event);
+			Check.RequireArgumentNotNull("event", nameof(@event));
+
+			var _result = this.c_rallyResultEvent.ExecuteInsert(@event);
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			//if (result == RallyResults.Data.Enumeration.Status.Success)
-			//{
-			//	return base.Request.CreateResponse(HttpStatusCode.Created);
-			//}
+			if (_result.Status == RallyResults.Common.Status.Success)
+			{
+				return base.Request.CreateResponse(HttpStatusCode.Created);
+			}
 
 			return base.Request.CreateResponse(HttpStatusCode.BadRequest);
 		}
@@ -55,19 +52,22 @@ namespace RallyResults.Public.Controllers.v1.Rally
 		[Route("update/event/id/{id}")]
 		public HttpResponseMessage Put(
 			int id,
-			RallyResults.Domain.Models.Event @event)
+			RallyResults.Common.Models.Domain.Event @event)
 		{
 			var _loggingContext = string.Format("{0}.Put.", this.GetType().FullName);
 			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
+
+			Check.RequireArgumentNotNull("id", nameof(id));
+			Check.RequireArgumentNotNull("event", nameof(@event));
 			
-			this.c_rallyResultEvent.ExecuteUpdate(@event, id);
+			var _result = this.c_rallyResultEvent.ExecuteUpdate(@event, id);
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			//if (_result > RallyResults.Data.Enumeration.Status.Success)
-			//{
-			//	return base.Request.CreateResponse(HttpStatusCode.OK);
-			//}
+			if (_result.Status == RallyResults.Common.Status.Success)
+			{
+				return base.Request.CreateResponse(HttpStatusCode.OK);
+			}
 
 			return base.Request.CreateResponse(HttpStatusCode.BadRequest);
 		}
@@ -80,14 +80,16 @@ namespace RallyResults.Public.Controllers.v1.Rally
 			var _loggingContext = string.Format("{0}.Delete.", this.GetType().FullName);
 			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
 
-			this.c_rallyResultEvent.ExecuteDelete(id);
+			Check.RequireArgumentNotNull("id", nameof(id));
+
+			var _result = this.c_rallyResultEvent.ExecuteDelete(id);
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			//if (_result > RallyResults.Data.Enumeration.Status.Success)
-			//{
-			//	return base.Request.CreateResponse(HttpStatusCode.OK);
-			//}
+			if (_result.Status == RallyResults.Common.Status.Success)
+			{
+				return base.Request.CreateResponse(HttpStatusCode.OK);
+			}
 
 			return base.Request.CreateResponse(HttpStatusCode.BadRequest);
 		}
@@ -100,14 +102,16 @@ namespace RallyResults.Public.Controllers.v1.Rally
 			var _loggingContext = string.Format("{0}.Get.", this.GetType().FullName);
 			this.c_logger.InfoFormat("{0} Commencing", _loggingContext);
 
-			this.c_rallyResultEvent.ExecuteSelect(id);
+			Check.RequireArgumentNotNull("id", nameof(id));
+
+			var _result = this.c_rallyResultEvent.ExecuteSelect(id);
 
 			this.c_logger.InfoFormat("{0} Completed", _loggingContext);
 
-			//if (_result != null)
-			//{
-			//	return base.Request.CreateResponse(HttpStatusCode.OK, _result);
-			//}
+			if (_result.Status == RallyResults.Common.Status.Success)
+			{
+				return base.Request.CreateResponse(HttpStatusCode.OK, _result.Value);
+			}
 
 			return base.Request.CreateResponse(HttpStatusCode.BadRequest);
 		}

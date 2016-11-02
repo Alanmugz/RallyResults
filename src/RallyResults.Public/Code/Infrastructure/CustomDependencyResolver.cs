@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using log4net;
+﻿using log4net;
 using log4net.Config;
 using System;
 using System.Collections.Generic;
@@ -15,13 +14,11 @@ namespace RallyResults.Public.Code.Infrastructure
 	{
 		private readonly string c_environment;
 		private readonly ILog c_logger;
-		private readonly IMapper c_mapper;
 		private readonly RallyResults.Domain.Rally.Event c_rallyResultsEvent;
-		//private readonly RallyResults.Data.IRepository c_eventsRepository;
+		private readonly RallyResults.Data.IRepository c_eventsRepository;
 
 
 		public ILog Logger { get { return this.c_logger; } }
-		public IMapper Mapper { get { return this.c_mapper; } }
 
 
 		public CustomDependencyResolver()
@@ -33,15 +30,7 @@ namespace RallyResults.Public.Code.Infrastructure
 
 			this.c_rallyResultsEvent = new RallyResults.Domain.Rally.Event(c_logger);
 
-			//this.c_eventsRepository = new RallyResults.Data.Repository(c_logger, ConfigurationManager.AppSettings["databaseConnectionString"]);
-
-			AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<RallyResults.Public.Models.Event, RallyResults.Domain.Models.Event>());
-			var config = new MapperConfiguration(cfg => {
-				cfg.CreateMap<RallyResults.Public.Models.Event, RallyResults.Domain.Models.Event>();
-				cfg.CreateMap<RallyResults.Public.Models.Category, RallyResults.Domain.Models.Category>();
-			});
-
-			c_mapper = new Mapper(config);
+			this.c_eventsRepository = new RallyResults.Data.Repository(c_logger);
 		}
 
 
@@ -60,7 +49,7 @@ namespace RallyResults.Public.Code.Infrastructure
 			if (serviceType == typeof(RallyResults.Public.Controllers.v1.Rally.rallyResultsEventController))
 			{
 				return new RallyResults.Public.Controllers.v1.Rally.rallyResultsEventController(
-					this.c_logger, this.c_mapper, this.c_rallyResultsEvent);
+					this.c_logger, this.c_rallyResultsEvent);
 			}
 
 			return null;

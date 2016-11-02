@@ -5,7 +5,7 @@ using NpgsqlTypes;
 using System;
 using System.Configuration;
 using System.Linq;
-using RallyResults.Data.Models;
+
 
 namespace RallyResults.Data
 {
@@ -23,8 +23,8 @@ namespace RallyResults.Data
 		}
 
 
-		public RallyResults.Data.Enumeration.Status InsertEvent(
-			RallyResults.Data.Models.Event subject)
+		public RallyResults.Common.IResult InsertEvent(
+			RallyResults.Common.Models.Data.Event subject)
 		{
 			try
 			{
@@ -44,7 +44,7 @@ namespace RallyResults.Data
 
 				_cmd.ExecuteNonQuery();
 
-				return RallyResults.Data.Enumeration.Status.Success;
+				return new RallyResults.Common.Result(RallyResults.Common.Status.Success, "Error");
 			}
 			catch (NpgsqlException ex)
 			{
@@ -55,13 +55,13 @@ namespace RallyResults.Data
 				this.c_connection.Close();
 			}
 
-			return RallyResults.Data.Enumeration.Status.Failure;
+			return new RallyResults.Common.Result(RallyResults.Common.Status.Failure, "Error");
 		}
 
 
-		public RallyResults.Data.Enumeration.Status UpdateEvent(
+		public RallyResults.Common.IResult UpdateEvent(
 			int id,
-			RallyResults.Data.Models.Event subject)
+			RallyResults.Common.Models.Data.Event subject)
 		{
 			var _entry = this.MapEvent(subject, id);
 
@@ -81,7 +81,7 @@ namespace RallyResults.Data
 
 				_cmd.ExecuteNonQuery();
 
-				return RallyResults.Data.Enumeration.Status.Success;
+				return new RallyResults.Common.Result(RallyResults.Common.Status.Success, "Success");
 			}
 			catch (NpgsqlException ex)
 			{
@@ -92,11 +92,11 @@ namespace RallyResults.Data
 				this.c_connection.Close();
 			}
 
-			return RallyResults.Data.Enumeration.Status.Failure;
+			return new RallyResults.Common.Result(RallyResults.Common.Status.Failure, "Error");
 		}
 
 
-		public RallyResults.Data.Enumeration.Status DeleteEvent(
+		public RallyResults.Common.IResult DeleteEvent(
 			int id)
 		{
 			try
@@ -109,7 +109,7 @@ namespace RallyResults.Data
 
 				_cmd.ExecuteNonQuery();
 
-				return RallyResults.Data.Enumeration.Status.Success;
+				return new RallyResults.Common.Result(RallyResults.Common.Status.Success, "Success");
 			}
 			catch (NpgsqlException ex)
 			{
@@ -120,11 +120,11 @@ namespace RallyResults.Data
 				this.c_connection.Close();
 			}
 
-			return RallyResults.Data.Enumeration.Status.Failure;
+			return new RallyResults.Common.Result(RallyResults.Common.Status.Failure, "Error");
 		}
 
 
-		public RallyResults.Data.AggregateRoot.Event SelectEvent(
+		public RallyResults.Common.IResult SelectEvent(
 			int id)
 		{
 			try
@@ -144,7 +144,7 @@ namespace RallyResults.Data
 						JsonConvert.DeserializeObject<RallyResults.Data.AggregateRoot.EventDetails>((string)row["Category_Class"]),
 						(DateTime)row["CreationTimestamp"]);
 
-					return _entry;
+					return new RallyResults.Common.Result(RallyResults.Common.Status.Success, "Success", _entry);
 				}
 			}
 			catch (NpgsqlException ex)
@@ -156,7 +156,7 @@ namespace RallyResults.Data
 				this.c_connection.Close();
 			}
 
-			return null;
+			return new RallyResults.Common.Result(RallyResults.Common.Status.Failure, "Error");
 		}
 
 
@@ -174,7 +174,7 @@ namespace RallyResults.Data
 
 
 		private RallyResults.Data.AggregateRoot.Event MapEvent(
-			RallyResults.Data.Models.Event subject,
+			RallyResults.Common.Models.Data.Event subject,
 			int id)
 		{
 			var categories  = subject.category.Select(category => new RallyResults.Data.AggregateRoot.Category(category.type, category.@class)).ToList();

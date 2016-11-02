@@ -1,9 +1,6 @@
 ﻿using log4net;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using RallyResults.Domain.Models;
 
 namespace RallyResults.Domain.Rally
 {
@@ -14,50 +11,50 @@ namespace RallyResults.Domain.Rally
 		public Event(
 			ILog logger)
 		{
-			this.c_eventsRepository = new RallyResults.Data.Repository(logger);
+
 		}
 
 
-		public void ExecuteInsert(
-			RallyResults.Domain.Models.Event subject)
+		public RallyResults.Common.IResult ExecuteInsert(
+			RallyResults.Common.Models.Domain.Event subject)
 		{
 			var _entry = this.MapEvent(subject);
 
-			this.c_eventsRepository.InsertEvent(_entry);
+			return this.c_eventsRepository.InsertEvent(_entry);
 		}
 
 		
 
-		public void ExecuteUpdate(
-			RallyResults.Domain.Models.Event subject,
+		public RallyResults.Common.IResult ExecuteUpdate(
+			RallyResults.Common.Models.Domain.Event subject,
 			int id)
 		{
 			var _entry = this.MapEvent(subject);
 
-			this.c_eventsRepository.UpdateEvent(id, _entry);
+			return this.c_eventsRepository.UpdateEvent(id, _entry);
 		}
 
 
-		public void ExecuteDelete(
+		public RallyResults.Common.IResult ExecuteDelete(
 			int id)
 		{
-			this.c_eventsRepository.DeleteEvent(id);
+			return this.c_eventsRepository.DeleteEvent(id);
 		}
 
 
-		public void ExecuteSelect(
+		public RallyResults.Common.IResult ExecuteSelect(
 			int id)
 		{
-			this.c_eventsRepository.SelectEvent(id);
+			return this.c_eventsRepository.SelectEvent(id);
 		}
 
 
-		private RallyResults.Data.Models.Event MapEvent(
-			RallyResults.Domain.Models.Event subject)
+		private RallyResults.Common.Models.Data.Event MapEvent(
+			RallyResults.Common.Models.Domain.Event subject)
 		{
-			var categories = subject.category.Select(category => new RallyResults.Data.Models.Category(category.type, category.@class)).ToList();
+			var categories = subject.category.Select(category => new RallyResults.Common.Models.Data.Category(category.type, category.@class)).ToList();
 
-			return new RallyResults.Data.Models.Event(
+			return new RallyResults.Common.Models.Data.Event(
 				subject.name,
 				subject.startdate,
 				subject.finishdate,

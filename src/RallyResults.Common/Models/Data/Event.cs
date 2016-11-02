@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace RallyResults.Domain.Models
+namespace RallyResults.Common.Models.Data
 {
 	public class Event
 	{
@@ -39,8 +39,8 @@ namespace RallyResults.Domain.Models
 
 	public class Category
 	{
-		public readonly string type;
-		public readonly string @class;
+		public string type;
+		public string @class;
 
 		public Category(
 			string type,
@@ -51,3 +51,4 @@ namespace RallyResults.Domain.Models
 		}
 	}
 }
+

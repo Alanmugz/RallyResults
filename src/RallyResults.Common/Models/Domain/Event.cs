@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace RallyResults.Public.Models
+namespace RallyResults.Common.Models.Domain
 {
 	public class Event
 	{

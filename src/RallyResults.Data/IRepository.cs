@@ -5,19 +5,20 @@ namespace RallyResults.Data
 {
 	public interface IRepository
 	{
-		RallyResults.Data.Enumeration.Status InsertEvent(RallyResults.Data.Models.Event subject);
+		RallyResults.Common.IResult InsertEvent(
+			RallyResults.Common.Models.Data.Event subject);
 
 
-		RallyResults.Data.Enumeration.Status UpdateEvent(
+		RallyResults.Common.IResult UpdateEvent(
 			int id,
-			RallyResults.Data.Models.Event subject);
+			RallyResults.Common.Models.Data.Event subject);
 
 
-		RallyResults.Data.Enumeration.Status DeleteEvent(
+		RallyResults.Common.IResult DeleteEvent(
 			int id);
 
 
-		RallyResults.Data.AggregateRoot.Event SelectEvent(
+		RallyResults.Common.IResult SelectEvent(
 			int id);
 	}
 }

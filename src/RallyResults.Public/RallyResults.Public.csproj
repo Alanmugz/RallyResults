@@ -69,10 +69,17 @@
     <Compile Include="Code\Infrastructure\GlobalExceptionHandler.cs" />
     <Compile Include="Code\Infrastructure\GlobalExceptionLogger.cs" />
     <Compile Include="Controllers\v1\Rally\rallyResultsEventController.cs" />
-    <Compile Include="Models\Event.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RallyResults.Common\RallyResults.Common.csproj">
+      <Project>{6d41f2c9-2200-4a84-9961-f008072f44cb}</Project>
+      <Name>RallyResults.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RallyResults.Data\RallyResults.Data.csproj">
+      <Project>{a9141827-66e5-4939-84d7-d778c660e8aa}</Project>
+      <Name>RallyResults.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RallyResults.Domain\RallyResults.Domain.csproj">
       <Project>{529e745e-8bc9-4a88-bcf7-80703c01278c}</Project>
       <Name>RallyResults.Domain</Name>
