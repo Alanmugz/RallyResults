@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace RallyResults.Data.AggregateRoot
+namespace RallyResults.Common.Models.AggregateRoot
 {
 	public class Event
 	{
@@ -13,7 +13,7 @@ namespace RallyResults.Data.AggregateRoot
 
 		public Event(
 			int id,
-			RallyResults.Data.AggregateRoot.EventDetails eventDetails,
+			RallyResults.Common.Models.AggregateRoot.EventDetails eventDetails,
 			DateTime creationTimestamp)
 		{
 			this.id = id;
@@ -43,7 +43,7 @@ namespace RallyResults.Data.AggregateRoot
 			string image,
 			List<int> service,
 			List<int> endofday,
-			List<RallyResults.Data.AggregateRoot.Category> category)
+			List<RallyResults.Common.Models.AggregateRoot.Category> category)
 		{
 			this.name = name;
 			this.startdate = startdate;

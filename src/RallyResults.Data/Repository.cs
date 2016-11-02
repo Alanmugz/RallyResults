@@ -139,9 +139,9 @@ namespace RallyResults.Data
 
 				while (row.Read())
 				{
-					var _entry = new RallyResults.Data.AggregateRoot.Event(
+					var _entry = new RallyResults.Common.Models.AggregateRoot.Event(
 						(int)row["Id"],
-						JsonConvert.DeserializeObject<RallyResults.Data.AggregateRoot.EventDetails>((string)row["Category_Class"]),
+						JsonConvert.DeserializeObject<RallyResults.Common.Models.AggregateRoot.EventDetails>((string)row["Category_Class"]),
 						(DateTime)row["CreationTimestamp"]);
 
 					return new RallyResults.Common.Result(RallyResults.Common.Status.Success, "Success", _entry);
@@ -173,15 +173,15 @@ namespace RallyResults.Data
 		}
 
 
-		private RallyResults.Data.AggregateRoot.Event MapEvent(
+		private RallyResults.Common.Models.AggregateRoot.Event MapEvent(
 			RallyResults.Common.Models.Data.Event subject,
 			int id)
 		{
-			var categories  = subject.category.Select(category => new RallyResults.Data.AggregateRoot.Category(category.type, category.@class)).ToList();
+			var categories  = subject.category.Select(category => new RallyResults.Common.Models.AggregateRoot.Category(category.type, category.@class)).ToList();
 
-			return new RallyResults.Data.AggregateRoot.Event(
+			return new RallyResults.Common.Models.AggregateRoot.Event(
 				id,
-				new RallyResults.Data.AggregateRoot.EventDetails(
+				new RallyResults.Common.Models.AggregateRoot.EventDetails(
 					subject.name,
 					subject.startdate,
 					subject.finishdate,

@@ -110,7 +110,8 @@ namespace RallyResults.Public.Controllers.v1.Rally
 
 			if (_result.Status == RallyResults.Common.Status.Success)
 			{
-				return base.Request.CreateResponse(HttpStatusCode.OK, _result.Value);
+				var _response = (RallyResults.Common.Models.AggregateRoot.Event)_result.Value;
+				return base.Request.CreateResponse(HttpStatusCode.OK, _response.eventDetails);
 			}
 
 			return base.Request.CreateResponse(HttpStatusCode.BadRequest);
