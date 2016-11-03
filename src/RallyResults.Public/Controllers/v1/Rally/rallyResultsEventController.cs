@@ -19,8 +19,8 @@ namespace RallyResults.Public.Controllers.v1.Rally
 			ILog logger,
 			RallyResults.Domain.Rally.Event events)
 		{
-			Check.RequireArgumentNotNull("logger", logger);
-			Check.RequireArgumentNotNull("events", events);
+			Check.RequireArgumentNotNull("logger", nameof(logger));
+			Check.RequireArgumentNotNull("events", nameof(events));
 
 			this.c_logger = logger;
 			this.c_rallyResultEvent = events;
