@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rally_results", "rally_results\rally_results.csproj", "{7C72F8B6-24C3-4E6C-93C2-B5AAA620953D}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RallyResults.Domain", "..\src\RallyResults.Domain\RallyResults.Domain.csproj", "{529E745E-8BC9-4A88-BCF7-80703C01278C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RallyResults.Common", "..\src\RallyResults.Common\RallyResults.Common.csproj", "{6D41F2C9-2200-4A84-9961-F008072F44CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RallyResults.Public.AT", "..\test\RallyResults.Public.AT\RallyResults.Public.AT.csproj", "{18754AD0-C318-4064-866B-C03248293F78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{6D41F2C9-2200-4A84-9961-F008072F44CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D41F2C9-2200-4A84-9961-F008072F44CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D41F2C9-2200-4A84-9961-F008072F44CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18754AD0-C318-4064-866B-C03248293F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18754AD0-C318-4064-866B-C03248293F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18754AD0-C318-4064-866B-C03248293F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18754AD0-C318-4064-866B-C03248293F78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
