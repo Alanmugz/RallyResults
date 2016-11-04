@@ -27,7 +27,10 @@ namespace RallyResults.Public.AT
 		[Given(@"I send a request to the API")]
 		public void GivenISendARequestToTheAPI()
 		{
-			var _response = this.c_httpClient.Post("http://localhost:2235/v1/rallyresults/insert/event", this.c_event);
+			var _response = this.c_httpClient.Post(
+				"http://localhost:2235/v1/rallyresults/insert/event", 
+				this.c_event,
+				"application/json");
 
 			ScenarioContext.Current.Add("resultcode", _response.StatusCode);
 		}

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HttpClient.cs" />
+    <Compile Include="IHttpClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RallyResultsEvents.feature.cs">
       <AutoGen>True</AutoGen>
